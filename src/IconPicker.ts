@@ -88,10 +88,10 @@ export class IconPicker {
     this.updateFooter(this.groupList.getIndex(), this.groupSize, arrGroup.length, totalResult);
   }
 
-  public setupFooter() {
-    this.footer.style.marginTop = '5px';
+  public setupFooter(firstGroupSize: number) {
+    this.footer.style.marginTop = '10px';
     this.footer.style.textAlign = 'center';
-    this.footer.innerHTML =`${this.groupList.getTotalItems()}`;
+    this.updateFooter(this.groupList.getIndex(), this.groupSize, firstGroupSize, this.groupList.getTotalItems());
     this.container?.append(this.footer);
   }
 
@@ -126,6 +126,6 @@ export class IconPicker {
     this.setupInputSearch();
     this.setupNavButtons();
     this.container?.append(this.iconButtons);
-    this.setupFooter();
+    this.setupFooter(group.length);
   }
 }
