@@ -1,2 +1,2 @@
 # IconPicker
-Javascript icon picker (Typescript)
+Vanilla Javascript Icon Picker (made with Typescript)
