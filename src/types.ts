@@ -1,3 +1,8 @@
 type IconButtonlistener = (param: string) => void;
 
-export type { IconButtonlistener };
+interface NavButtons {
+  previous: HTMLButtonElement;
+  next: HTMLButtonElement;
+}
+
+export type { IconButtonlistener, NavButtons };
