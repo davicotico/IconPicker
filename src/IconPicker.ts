@@ -45,12 +45,15 @@ export class IconPicker {
       this.totalResult = this.groupList.search(input.value);
       emptyElement(this.iconButtons);
       if (this.totalResult > 0) {
-        this.setupIconButtons(this.groupList.first());
+        let group = this.groupList.first()
+        this.setupIconButtons(group);
         this.updateNavLabel(this.groupList.getIndex(), this.groupList.getTotalGroups());
         this.updateNavButtons(this.groupList.isFirst(), this.groupList.isLast(), this.navButtons.previous, this.navButtons.next);
+        this.updateFooter(this.groupList.getIndex(), this.groupSize, group.length, this.totalResult);
       } else {
         this.updateNavLabel(-1, 0);
         this.updateNavButtons(true, true, this.navButtons.previous, this.navButtons.next);
+        this.footer.innerHTML = `'${input.value}' is not found`;
       }
     });
     input.style.boxSizing = 'border-box';
