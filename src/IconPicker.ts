@@ -17,11 +17,11 @@ export class IconPicker {
   protected navButtons: NavButtons;
   protected iconButtonEvent = new IconButtonEvent();
 
-  constructor(id: string, iconset: string[], groupSize: number = 20) {
+  constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5) {
     this.iconset = iconset;
-    this.groupList = new GroupList(this.iconset, groupSize);
+    this.groupSize = rows * cols;
+    this.groupList = new GroupList(this.iconset, this.groupSize);
     this.totalResult = this.groupList.getTotalItems();
-    this.groupSize = groupSize;
     this.container = document.getElementById(id) as HTMLDivElement; //createDiv('', '400px');
     this.navLabel = document.createElement('div');
     this.navButtons = {
@@ -29,6 +29,10 @@ export class IconPicker {
       next: createButton(ARROW_RIGHT)
     };
     this.iconButtons = createDiv("icon-button-group", "100%");
+    this.iconButtons.style.display = 'grid';
+    this.iconButtons.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+    this.iconButtons.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    this.iconButtons.style.gap = '8px';
     this.footer = createDiv('ip-footer', '100%');
   }
 
@@ -46,7 +50,7 @@ export class IconPicker {
       emptyElement(this.iconButtons);
       if (this.totalResult > 0) {
         let group = this.groupList.first()
-        this.setupIconButtons(group);
+        this.updateIconButtons(group);
         this.updateNavLabel(this.groupList.getIndex(), this.groupList.getTotalGroups());
         this.updateNavButtons(this.groupList.isFirst(), this.groupList.isLast(), this.navButtons.previous, this.navButtons.next);
         this.updateFooter(this.groupList.getIndex(), this.groupSize, group.length, this.totalResult);
@@ -79,13 +83,11 @@ export class IconPicker {
       let group = this.groupList.next();
       this.updateElements(this.groupList, group, this.totalResult, this.navButtons);
     });
-
     this.navButtons.previous.addEventListener("click", () => {
       emptyElement(this.iconButtons);
       let group = this.groupList.previous();
       this.updateElements(this.groupList, group, this.totalResult, this.navButtons)
     });
-
     div.append(this.navButtons.previous);
     div.append(this.navLabel)
     div.append(this.navButtons.next);
@@ -94,7 +96,7 @@ export class IconPicker {
 
   protected updateElements(groupList: GroupList, arrGroup: string[], totalResult: number, navButtons: NavButtons) {
     this.updateNavLabel(groupList.getIndex(), groupList.getTotalGroups());
-    this.setupIconButtons(arrGroup);
+    this.updateIconButtons(arrGroup);
     this.updateNavButtons(groupList.isFirst(), groupList.isLast(), navButtons.previous, navButtons.next);
     this.updateFooter(this.groupList.getIndex(), this.groupSize, arrGroup.length, totalResult);
   }
@@ -106,7 +108,7 @@ export class IconPicker {
     this.container?.append(this.footer);
   }
 
-  public setupIconButtons(icons: string[]): void {
+  public updateIconButtons(icons: string[]): void {
     icons.forEach((item) => {
       let button = createButton(createIcon(item));
       button.addEventListener("click", () => {
@@ -133,7 +135,7 @@ export class IconPicker {
 
   public mount() {
     let group = this.groupList.first();
-    this.setupIconButtons(group);
+    this.updateIconButtons(group);
     this.setupInputSearch();
     this.setupNavButtons();
     this.container?.append(this.iconButtons);

@@ -5,4 +5,10 @@ interface NavButtons {
   next: HTMLButtonElement;
 }
 
-export type { IconButtonlistener, NavButtons };
+interface Options {
+  iconButtonClass: string;
+  navButtonClass: string;
+
+}
+
+export type { IconButtonlistener, NavButtons, Options };
