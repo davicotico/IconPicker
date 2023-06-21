@@ -1,3 +1,5 @@
+import { Options } from "./types";
+
 const KEYS = {
     ENTER: 'Enter',
     ESCAPE: 'Escape'
@@ -6,8 +8,15 @@ const KEYS = {
 const ARROW_LEFT = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="none" stroke="currentColor" stroke-linecap="square" d="M10 14L3 7.5L10 1"/></svg>`;
 const ARROW_RIGHT = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="none" stroke="currentColor" stroke-linecap="square" d="m5 14l7-6.5L5 1"/></svg>`;
 
+const defaultOptions: Options = {
+    inputPlaceholder: 'Search...',
+    iconButtonClass: 'ip-icon-button',
+    navButtonClass: 'ip-nav-button',
+}
+
 export {
     KEYS,
     ARROW_LEFT,
-    ARROW_RIGHT
+    ARROW_RIGHT,
+    defaultOptions
 }

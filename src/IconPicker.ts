@@ -1,8 +1,8 @@
 import { IconButtonEvent } from "./IconButtonEvent";
 import { GroupList } from "./IconList";
-import { ARROW_LEFT, ARROW_RIGHT, KEYS } from "./constants";
+import { ARROW_LEFT, ARROW_RIGHT, KEYS, defaultOptions } from "./constants";
 import { createButton, createDiv, createIcon, emptyElement } from "./functions";
-import { IconButtonlistener, NavButtons } from "./types";
+import { IconButtonlistener, NavButtons, Options } from "./types";
 
 export class IconPicker {
   protected iconset: string[];
@@ -13,20 +13,21 @@ export class IconPicker {
   protected groupList: GroupList;
   protected groupSize: number;
   protected totalResult: number = 0;
-
   protected navButtons: NavButtons;
   protected iconButtonEvent = new IconButtonEvent();
+  protected options: Options;
 
-  constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5) {
+  constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: Options = defaultOptions) {
     this.iconset = iconset;
     this.groupSize = rows * cols;
     this.groupList = new GroupList(this.iconset, this.groupSize);
     this.totalResult = this.groupList.getTotalItems();
+    this.options = options;
     this.container = document.getElementById(id) as HTMLDivElement; //createDiv('', '400px');
     this.navLabel = document.createElement('div');
     this.navButtons = {
-      previous: createButton(ARROW_LEFT),
-      next: createButton(ARROW_RIGHT)
+      previous: createButton(ARROW_LEFT, this.options.navButtonClass),
+      next: createButton(ARROW_RIGHT, this.options.navButtonClass)
     };
     this.iconButtons = createDiv("icon-button-group", "100%");
     this.iconButtons.style.display = 'grid';
@@ -44,6 +45,7 @@ export class IconPicker {
     let div = createDiv('ip-search', '100%');
     div.style.marginBottom = '5px';
     let input = document.createElement('input');
+    input.placeholder = this.options.inputPlaceholder;
     input.addEventListener('keyup', (evt) => {
       if (evt.key == KEYS.ENTER) { }
       this.totalResult = this.groupList.search(input.value);
@@ -110,7 +112,7 @@ export class IconPicker {
 
   public updateIconButtons(icons: string[]): void {
     icons.forEach((item) => {
-      let button = createButton(createIcon(item));
+      let button = createButton(createIcon(item), this.options.iconButtonClass);
       button.addEventListener("click", () => {
         this.iconButtonEvent.emit('select', item);
       });

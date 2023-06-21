@@ -1,6 +1,7 @@
 
-function createButton(content: string | HTMLElement) {
+function createButton(content: string | HTMLElement, className: string = '') {
   const b = document.createElement('button');
+  b.className = className;
   if (typeof content == 'string') {
     b.innerHTML = content;
     return b;

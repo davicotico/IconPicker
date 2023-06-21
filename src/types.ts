@@ -8,7 +8,7 @@ interface NavButtons {
 interface Options {
   iconButtonClass: string;
   navButtonClass: string;
-
+  inputPlaceholder: string;
 }
 
 export type { IconButtonlistener, NavButtons, Options };
