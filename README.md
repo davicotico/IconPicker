@@ -17,6 +17,6 @@ iconPicker.mount();
 
 ## Methods
 
-* constructor(id: string, iconsets: string[], rows: number, cols: number)
+* constructor(id: string, iconsets: string[], rows: number, cols: number, options: Options)
 * onSelect(listener: (param: string) => void): void
 * mount(): void
