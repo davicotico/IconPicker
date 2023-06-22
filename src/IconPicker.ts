@@ -26,8 +26,8 @@ export class IconPicker {
     this.container = document.getElementById(id) as HTMLDivElement; //createDiv('', '400px');
     this.navLabel = document.createElement('div');
     this.navButtons = {
-      previous: createButton(ARROW_LEFT, this.options.navButtonClass),
-      next: createButton(ARROW_RIGHT, this.options.navButtonClass)
+      previous: createButton(createIcon('fa-solid fa-arrow-left'), this.options.navButtonClass),
+      next: createButton(createIcon('fa-solid fa-arrow-right'), this.options.navButtonClass)
     };
     this.iconButtons = createDiv("icon-button-group", "100%");
     this.iconButtons.style.display = 'grid';
@@ -45,6 +45,8 @@ export class IconPicker {
     let div = createDiv('ip-search', '100%');
     div.style.marginBottom = '5px';
     let input = document.createElement('input');
+    input.type = 'text';
+    input.className = this.options.inputClass;
     input.placeholder = this.options.inputPlaceholder;
     input.addEventListener('keyup', (evt) => {
       if (evt.key == KEYS.ENTER) { }
