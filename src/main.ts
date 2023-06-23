@@ -1,6 +1,8 @@
 import { IconPicker } from "./IconPicker";
 import { FA_6 } from "./iconsets/fontawesome6";
 import { Options } from "./types";
+// @ts-ignore
+import { bi } from '../public/iconsets/bi.js';
 /*
 // primer
 const options: Options = {
@@ -27,7 +29,7 @@ const options: Options = {
   navButtonClass: 'btn btn-primary',
 }
 
-const ip = new IconPicker('icons', FA_6, 4, 4, options);
+const ip = new IconPicker('icons', bi, 4, 4, options);
 var output = document.getElementById('output') as HTMLElement;
 ip.onSelect((icono) => {
   output.innerText = icono;

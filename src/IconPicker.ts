@@ -1,6 +1,6 @@
 import { IconButtonEvent } from "./IconButtonEvent";
 import { GroupList } from "./IconList";
-import { ARROW_LEFT, ARROW_RIGHT, KEYS, defaultOptions } from "./constants";
+import { KEYS, defaultOptions } from "./constants";
 import { createButton, createDiv, createIcon, emptyElement } from "./functions";
 import { IconButtonlistener, NavButtons, Options } from "./types";
 
@@ -43,7 +43,7 @@ export class IconPicker {
 
   public setupInputSearch(): void {
     let div = createDiv('ip-search', '100%');
-    div.style.marginBottom = '5px';
+    div.style.marginBottom = '8px';
     let input = document.createElement('input');
     input.type = 'text';
     input.className = this.options.inputClass;
@@ -71,17 +71,20 @@ export class IconPicker {
   }
 
   protected setupNavLabel(currentIndex: number, total: number): void {
-    this.navLabel.style.textAlign = 'center';
     this.navLabel.style.flexGrow = '1';
+    this.navLabel.style.display = 'flex';
+    this.navLabel.style.justifyContent = 'center';
+    this.navLabel.style.alignItems = 'center';
     this.updateNavLabel(currentIndex, total);
   }
 
   public setupNavButtons() {
     let div = createDiv("action-buttons", "100%");
     div.style.display = "flex";
-    div.style.marginBottom = "5px";
+    div.style.marginBottom = "8px";
     let total = this.groupList.getTotalGroups();
     this.setupNavLabel(this.groupList.getIndex(), total);
+    this.updateNavButtons(this.groupList.isFirst(), this.groupList.isLast(), this.navButtons.previous, this.navButtons.next);
     this.navButtons.next.addEventListener("click", () => {
       emptyElement(this.iconButtons);
       let group = this.groupList.next();
@@ -142,6 +145,7 @@ export class IconPicker {
     this.updateIconButtons(group);
     this.setupInputSearch();
     this.setupNavButtons();
+    
     this.container?.append(this.iconButtons);
     this.setupFooter(group.length);
   }
