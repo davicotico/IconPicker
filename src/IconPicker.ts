@@ -26,8 +26,8 @@ export class IconPicker {
     this.container = document.getElementById(id) as HTMLDivElement; //createDiv('', '400px');
     this.navLabel = document.createElement('div');
     this.navButtons = {
-      previous: createButton(createIcon('fa-solid fa-arrow-left'), this.options.navButtonClass),
-      next: createButton(createIcon('fa-solid fa-arrow-right'), this.options.navButtonClass)
+      previous: createButton(createIcon(this.options.arrowPrevIconClass), this.options.navButtonClass),
+      next: createButton(createIcon(this.options.arrowNextIconClass), this.options.navButtonClass)
     };
     this.iconButtons = createDiv("icon-button-group", "100%");
     this.iconButtons.style.display = 'grid';

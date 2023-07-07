@@ -1,5 +1,5 @@
 import { IconPicker } from "./IconPicker";
-import { FA_6 } from "./iconsets/fontawesome6";
+//import { FA_6 } from "./iconsets/fontawesome6";
 import { Options } from "./types";
 // @ts-ignore
 import { bi } from '../public/iconsets/bi.js';
@@ -21,12 +21,15 @@ const options: Options = {
   navButtonClass: 'button is-primary',
 }
 */
+
 // bootstrap
 const options: Options = {
   iconButtonClass: 'btn btn-outline-secondary',
   inputClass: 'form-control',
   inputPlaceholder: 'Search...',
   navButtonClass: 'btn btn-primary',
+  arrowPrevIconClass: 'bi bi-chevron-left',
+  arrowNextIconClass: 'bi bi-chevron-right'
 }
 
 const ip = new IconPicker('icons', bi, 4, 4, options);

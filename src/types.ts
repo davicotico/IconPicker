@@ -10,6 +10,8 @@ interface Options {
   navButtonClass: string;
   inputPlaceholder: string;
   inputClass: string;
+  arrowPrevIconClass: string;
+  arrowNextIconClass: string;
 }
 
 export type { IconButtonlistener, NavButtons, Options };

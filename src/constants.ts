@@ -13,6 +13,8 @@ const defaultOptions: Options = {
     iconButtonClass: 'ip-icon-button',
     navButtonClass: 'ip-nav-button',
     inputClass: 'ip-input-search',
+    arrowPrevIconClass: '',
+    arrowNextIconClass: '',
 }
 
 export {
