@@ -5,6 +5,7 @@ export class InputSearch {
   protected input: HTMLInputElement;
   constructor(inputClass: string, placeholder: string) {
     this.container = createDiv("ip-search", "100%");
+    this.container.style.marginTop = "8px";
     this.container.style.marginBottom = "8px";
     this.input = document.createElement("input");
     this.input.type = 'text';

@@ -5,7 +5,8 @@ export class Footer {
 
   constructor() {
     this.container = createDiv("ip-footer", "100%");
-    this.container.style.marginTop = '10px';
+    this.container.style.marginTop = '8px';
+    this.container.style.marginBottom = '8px';
     this.container.style.textAlign = 'center';
   }
 

@@ -5,8 +5,12 @@ import { GroupList } from "./IconList";
 import { InputSearch } from "./InputSearch";
 import { NavBar } from "./NavBar";
 import { KEYS, defaultOptions } from "./constants";
-import { emptyElement } from "./functions";
+import { createDiv, emptyElement } from "./functions";
 import { IconButtonlistener, NavButtons, Options } from "./types";
+
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light-border.css';
 
 export class IconPicker {
   protected iconset: string[];
@@ -20,11 +24,25 @@ export class IconPicker {
   protected options: Options;
   protected totalResult: number = 0;
   protected groupSize: number;
+  protected isButton: boolean = false;
+  protected button: HTMLButtonElement | null = null;
 
   constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: Options = defaultOptions) {
-    this.container = document.getElementById(id) as HTMLDivElement;
-    if (this.container == null) {
+    let element = document.getElementById(id);
+    if (element == null) {
       throw Error('Element does not exists');
+    }
+    switch (element.tagName) {
+      case 'DIV':
+        this.container = element as HTMLDivElement;
+      break;
+      case 'BUTTON':
+        this.container = createDiv('cont', '250px')
+        this.isButton = true;
+        this.button = element as HTMLButtonElement;
+      break;
+      default: 
+        throw Error('Element it is not a div or button');
     }
     this.iconset = iconset;
     this.options = options;
@@ -95,5 +113,14 @@ export class IconPicker {
     this.container.append(this.iconButtonGroup.getElement());
     this.footer.update(this.groupList.getIndex(), this.groupSize, firstGroup.length, this.groupList.getTotalItems());
     this.container.append(this.footer.getElement());
+    if (this.isButton) {
+      tippy('#icons', {
+        content: this.container,
+        appendTo: document.body,
+        interactive: true,
+        trigger: 'click',
+        theme: 'light-border'
+      })
+    }
   }
 }
