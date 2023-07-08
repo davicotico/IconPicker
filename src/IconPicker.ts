@@ -1,3 +1,4 @@
+import { Footer } from "./Footer";
 import { IconButtonEvent } from "./IconButtonEvent";
 import { IconButtonGroup } from "./IconButtonGroup";
 import { GroupList } from "./IconList";
@@ -9,8 +10,8 @@ export class IconPicker {
   protected iconset: string[];
   protected container: HTMLDivElement | null;
   protected iconButtonGroup: IconButtonGroup;
+  protected footer: Footer;
   protected navLabel: HTMLDivElement;
-  protected footer: HTMLDivElement;
   protected groupList: GroupList;
   protected groupSize: number;
   protected totalResult: number = 0;
@@ -31,7 +32,7 @@ export class IconPicker {
       next: createButton(createIcon(this.options.arrowNextIconClass), this.options.navButtonClass)
     };
     this.iconButtonGroup = new IconButtonGroup(rows, cols, this.iconButtonEvent, this.options.iconButtonClass);
-    this.footer = createDiv('ip-footer', '100%');
+    this.footer = new Footer();
   }
 
   onSelect(listener: IconButtonlistener): void {
@@ -50,15 +51,15 @@ export class IconPicker {
       this.totalResult = this.groupList.search(input.value);
       emptyElement(this.iconButtonGroup.getElement());
       if (this.totalResult > 0) {
-        let group = this.groupList.first()
+        let group = this.groupList.first();
         this.iconButtonGroup.updateIconButtons(group);
         this.updateNavLabel(this.groupList.getIndex(), this.groupList.getTotalGroups());
         this.updateNavButtons(this.groupList.isFirst(), this.groupList.isLast(), this.navButtons.previous, this.navButtons.next);
-        this.updateFooter(this.groupList.getIndex(), this.groupSize, group.length, this.totalResult);
+        this.footer.update(this.groupList.getIndex(), this.groupSize, group.length, this.totalResult);
       } else {
         this.updateNavLabel(-1, 0);
         this.updateNavButtons(true, true, this.navButtons.previous, this.navButtons.next);
-        this.footer.innerHTML = `'${input.value}' is not found`;
+        this.footer.getElement().innerHTML = `'${input.value}' is not found`;
       }
     });
     input.style.boxSizing = 'border-box';
@@ -102,14 +103,7 @@ export class IconPicker {
     this.updateNavLabel(groupList.getIndex(), groupList.getTotalGroups());
     this.iconButtonGroup.updateIconButtons(arrGroup);
     this.updateNavButtons(groupList.isFirst(), groupList.isLast(), navButtons.previous, navButtons.next);
-    this.updateFooter(this.groupList.getIndex(), this.groupSize, arrGroup.length, totalResult);
-  }
-
-  public setupFooter(firstGroupSize: number) {
-    this.footer.style.marginTop = '10px';
-    this.footer.style.textAlign = 'center';
-    this.updateFooter(this.groupList.getIndex(), this.groupSize, firstGroupSize, this.groupList.getTotalItems());
-    this.container?.append(this.footer);
+    this.footer.update(this.groupList.getIndex(), this.groupSize, arrGroup.length, totalResult);
   }
 
   protected updateNavButtons(isFirst: boolean, isLast: boolean, buttonPrevious: HTMLButtonElement, buttonNext: HTMLButtonElement): void {
@@ -121,18 +115,13 @@ export class IconPicker {
     this.navLabel.innerHTML = `${currentIndex + 1} / ${total}`;
   }
 
-  protected updateFooter(index: number, sizeGroup: number, sizeResult: number, total: number): void {
-    let start = (index * sizeGroup) + 1;
-    let end = (start - 1) + sizeResult;
-    this.footer.innerHTML = `[${start} - ${end}] of ${total}`;
-  }
-
   public mount() {
     let group = this.groupList.first();
     this.iconButtonGroup.updateIconButtons(group);
     this.setupInputSearch();
     this.setupNavButtons();
     this.container?.append(this.iconButtonGroup.getElement());
-    this.setupFooter(group.length);
+    this.footer.update(this.groupList.getIndex(), this.groupSize, group.length, this.groupList.getTotalItems());
+    this.container?.append(this.footer.getElement());
   }
 }
