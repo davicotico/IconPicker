@@ -10,7 +10,7 @@ import { IconButtonlistener, NavButtons, Options } from "./types";
 
 export class IconPicker {
   protected iconset: string[];
-  protected container: HTMLDivElement | null;
+  protected container: HTMLDivElement;
   protected inputSearch: InputSearch;
   protected iconButtonGroup: IconButtonGroup;
   protected footer: Footer;
@@ -22,19 +22,22 @@ export class IconPicker {
   protected groupSize: number;
 
   constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: Options = defaultOptions) {
-    this.container = document.getElementById(id) as HTMLDivElement; //createDiv('', '400px');
+    this.container = document.getElementById(id) as HTMLDivElement;
+    if (this.container == null) {
+      throw Error('Element does not exists');
+    }
     this.iconset = iconset;
+    this.options = options;
     this.groupSize = rows * cols;
     this.groupList = new GroupList(this.iconset, this.groupSize);
     this.totalResult = this.groupList.getTotalItems();
-    this.options = options;
     this.inputSearch = new InputSearch(this.options.inputClass, this.options.inputPlaceholder);
     this.navBar = new NavBar(this.options.navButtonClass, this.options.arrowPrevIconClass, this.options.arrowNextIconClass);
     this.iconButtonGroup = new IconButtonGroup(rows, cols, this.iconButtonEvent, this.options.iconButtonClass);
     this.footer = new Footer();
   }
 
-  onSelect(listener: IconButtonlistener): void {
+  public onSelect(listener: IconButtonlistener): void {
     this.iconButtonEvent.on('select', listener);
   }
 
@@ -74,7 +77,7 @@ export class IconPicker {
       this.updateElements(this.groupList, group, this.totalResult, this.navBar.getButtons());
     });
     this.navBar.mount();
-    this.container?.append(this.navBar.getElement());
+    this.container.append(this.navBar.getElement());
   }
 
   protected updateElements(groupList: GroupList, arrGroup: string[], totalResult: number, navButtons: NavButtons) {
@@ -85,12 +88,12 @@ export class IconPicker {
   }
 
   public mount(): void {
-    let group = this.groupList.first();
-    this.iconButtonGroup.updateIconButtons(group);
+    let firstGroup = this.groupList.first();
+    this.iconButtonGroup.updateIconButtons(firstGroup);
     this.setupInputSearch();
     this.setupNavButtons();
-    this.container?.append(this.iconButtonGroup.getElement());
-    this.footer.update(this.groupList.getIndex(), this.groupSize, group.length, this.groupList.getTotalItems());
-    this.container?.append(this.footer.getElement());
+    this.container.append(this.iconButtonGroup.getElement());
+    this.footer.update(this.groupList.getIndex(), this.groupSize, firstGroup.length, this.groupList.getTotalItems());
+    this.container.append(this.footer.getElement());
   }
 }
