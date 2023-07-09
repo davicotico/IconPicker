@@ -4,13 +4,10 @@ import { IconButtonGroup } from "./IconButtonGroup";
 import { GroupList } from "./IconList";
 import { InputSearch } from "./InputSearch";
 import { NavBar } from "./NavBar";
+import { Popover } from "./Popover";
 import { KEYS, defaultOptions } from "./constants";
 import { createDiv, emptyElement } from "./functions";
 import { IconButtonlistener, NavButtons, Options } from "./types";
-
-import tippy, { Instance } from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light-border.css';
 
 export class IconPicker {
   protected iconset: string[];
@@ -26,7 +23,7 @@ export class IconPicker {
   protected groupSize: number;
   protected isButton: boolean = false;
   protected button: HTMLButtonElement | null = null;
-  protected instanceTippy: Instance | null = null;
+  protected popover: Popover | null = null;
   protected selected: string = '';
 
 
@@ -61,14 +58,15 @@ export class IconPicker {
   public onSelect(listener: IconButtonlistener): void {
     this.iconButtonEvent.on('select', listener);
     this.iconButtonEvent.on('select', () => {
-      this.instanceTippy?.hide();
+      this.popover?.hide();
     });
   }
 
   public setupInputSearch(): void {
     this.inputSearch.getInput().addEventListener('keyup', (evt) => {
       if (evt.key == KEYS.ESCAPE) { 
-        this.instanceTippy?.hide();
+        this.popover?.hide();
+        return;
       }
       this.totalResult = this.groupList.search(this.inputSearch.getInput().value);
       emptyElement(this.iconButtonGroup.getElement());
@@ -122,13 +120,7 @@ export class IconPicker {
     this.footer.update(this.groupList.getIndex(), this.groupSize, firstGroup.length, this.groupList.getTotalItems());
     this.container.append(this.footer.getElement());
     if (this.isButton) {
-      this.instanceTippy = tippy(this.button as Element, {
-        content: this.container,
-        appendTo: document.body,
-        interactive: true,
-        trigger: 'click',
-        theme: 'light-border'
-      });
+      this.popover = new Popover(this.container, this.button as Element);
     }
   }
 }
