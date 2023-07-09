@@ -8,7 +8,7 @@ import { KEYS, defaultOptions } from "./constants";
 import { createDiv, emptyElement } from "./functions";
 import { IconButtonlistener, NavButtons, Options } from "./types";
 
-import tippy from 'tippy.js';
+import tippy, { Instance } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light-border.css';
 
@@ -26,6 +26,9 @@ export class IconPicker {
   protected groupSize: number;
   protected isButton: boolean = false;
   protected button: HTMLButtonElement | null = null;
+  protected instanceTippy: Instance | null = null;
+  protected selected: string = '';
+
 
   constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: Options = defaultOptions) {
     let element = document.getElementById(id);
@@ -37,7 +40,7 @@ export class IconPicker {
         this.container = element as HTMLDivElement;
       break;
       case 'BUTTON':
-        this.container = createDiv('cont', '250px')
+        this.container = createDiv(id  + '-ip-container', '250px')
         this.isButton = true;
         this.button = element as HTMLButtonElement;
       break;
@@ -57,11 +60,16 @@ export class IconPicker {
 
   public onSelect(listener: IconButtonlistener): void {
     this.iconButtonEvent.on('select', listener);
+    this.iconButtonEvent.on('select', () => {
+      this.instanceTippy?.hide();
+    });
   }
 
   public setupInputSearch(): void {
     this.inputSearch.getInput().addEventListener('keyup', (evt) => {
-      if (evt.key == KEYS.ENTER) { }
+      if (evt.key == KEYS.ESCAPE) { 
+        this.instanceTippy?.hide();
+      }
       this.totalResult = this.groupList.search(this.inputSearch.getInput().value);
       emptyElement(this.iconButtonGroup.getElement());
       if (this.totalResult > 0) {
@@ -114,13 +122,13 @@ export class IconPicker {
     this.footer.update(this.groupList.getIndex(), this.groupSize, firstGroup.length, this.groupList.getTotalItems());
     this.container.append(this.footer.getElement());
     if (this.isButton) {
-      tippy('#icons', {
+      this.instanceTippy = tippy(this.button as Element, {
         content: this.container,
         appendTo: document.body,
         interactive: true,
         trigger: 'click',
         theme: 'light-border'
-      })
+      });
     }
   }
 }
