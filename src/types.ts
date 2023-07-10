@@ -1,4 +1,9 @@
-type IconButtonlistener = (param: string) => void;
+interface ClickButtonParameter {
+  icon: string;
+  button: HTMLButtonElement;
+};
+
+type IconButtonlistener = (param: ClickButtonParameter) => void;
 
 interface NavButtons {
   previous: HTMLButtonElement;
@@ -7,6 +12,7 @@ interface NavButtons {
 
 interface Options {
   iconButtonClass: string;
+  selectedIconButtonClass: string;
   navButtonClass: string;
   inputPlaceholder: string;
   inputClass: string;
@@ -14,4 +20,4 @@ interface Options {
   arrowNextIconClass: string;
 }
 
-export type { IconButtonlistener, NavButtons, Options };
+export type { IconButtonlistener, NavButtons, Options, ClickButtonParameter };

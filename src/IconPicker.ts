@@ -1,5 +1,5 @@
+import { EventManager } from "./EventManager";
 import { Footer } from "./Footer";
-import { IconButtonEvent } from "./IconButtonEvent";
 import { IconButtonGroup } from "./IconButtonGroup";
 import { GroupList } from "./IconList";
 import { InputSearch } from "./InputSearch";
@@ -17,7 +17,7 @@ export class IconPicker {
   protected footer: Footer;
   protected navBar: NavBar;
   protected groupList: GroupList;
-  protected iconButtonEvent = new IconButtonEvent();
+  protected iconButtonEvent = new EventManager();
   protected options: Options;
   protected totalResult: number = 0;
   protected groupSize: number;
@@ -25,7 +25,6 @@ export class IconPicker {
   protected button: HTMLButtonElement | null = null;
   protected popover: Popover | null = null;
   protected selected: string = '';
-
 
   constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: Options = defaultOptions) {
     let element = document.getElementById(id);
@@ -51,20 +50,21 @@ export class IconPicker {
     this.totalResult = this.groupList.getTotalItems();
     this.inputSearch = new InputSearch(this.options.inputClass, this.options.inputPlaceholder);
     this.navBar = new NavBar(this.options.navButtonClass, this.options.arrowPrevIconClass, this.options.arrowNextIconClass);
-    this.iconButtonGroup = new IconButtonGroup(rows, cols, this.iconButtonEvent, this.options.iconButtonClass);
+    this.iconButtonGroup = new IconButtonGroup(rows, cols, this.iconButtonEvent, this.options.iconButtonClass, this.options.selectedIconButtonClass);
     this.footer = new Footer();
+    this.onSelect((params) => {
+      params.button.className = this.options.selectedIconButtonClass;
+      this.iconButtonGroup.setSelected(params.icon);
+    })
   }
 
   public onSelect(listener: IconButtonlistener): void {
     this.iconButtonEvent.on('select', listener);
-    this.iconButtonEvent.on('select', () => {
-      this.popover?.hide();
-    });
   }
 
   public setupInputSearch(): void {
     this.inputSearch.getInput().addEventListener('keyup', (evt) => {
-      if (evt.key == KEYS.ESCAPE) { 
+      if (evt.key == KEYS.ESCAPE && this.isButton) {
         this.popover?.hide();
         return;
       }
@@ -121,6 +121,9 @@ export class IconPicker {
     this.container.append(this.footer.getElement());
     if (this.isButton) {
       this.popover = new Popover(this.container, this.button as Element);
+      this.iconButtonEvent.on('select', () => {
+        this.popover?.hide();
+      });
     }
   }
 }

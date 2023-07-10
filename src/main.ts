@@ -25,6 +25,7 @@ const options: Options = {
 // bootstrap
 const options: Options = {
   iconButtonClass: 'btn btn-outline-secondary',
+  selectedIconButtonClass: 'btn btn-primary',
   inputClass: 'form-control',
   inputPlaceholder: 'Search...',
   navButtonClass: 'btn btn-primary',
@@ -34,7 +35,7 @@ const options: Options = {
 
 const ip = new IconPicker('icons', bi, 4, 4, options);
 var output = document.getElementById('output') as HTMLElement;
-ip.onSelect((icono) => {
-  output.innerText = icono;
+ip.onSelect((parameters) => {
+  output.innerText = parameters.icon;
 });
 ip.mount();

@@ -11,6 +11,7 @@ const ARROW_RIGHT = `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBo
 const defaultOptions: Options = {
     inputPlaceholder: 'Search...',
     iconButtonClass: 'ip-icon-button',
+    selectedIconButtonClass: 'ip-selected-icon-button',
     navButtonClass: 'ip-nav-button',
     inputClass: 'ip-input-search',
     arrowPrevIconClass: '',
