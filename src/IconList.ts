@@ -91,6 +91,25 @@ export class GroupList {
     return result.length;
   }
 
+  public goTo(index: number): string[] {
+    if ((index >= 0) && (index < this.groups.length)) {
+      this.index = index;
+      return this.groups[this.index];
+    }
+    return [];
+  }
+
+  public getGroupIndex(icon: string): number {
+    for (let i = 0; i < this.groups.length; i++) {
+      for (let j = 0; j < this.groups[i].length; j++) {
+        if (this.groups[i][j] === icon) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
   public getAllItems() {
     return this.items;
   }

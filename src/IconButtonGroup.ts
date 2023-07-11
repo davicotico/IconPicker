@@ -1,5 +1,5 @@
 import { EventManager } from "./EventManager";
-import { createButton, createDiv, createIcon } from "./functions";
+import { createButton, createDiv, createIcon, emptyElement } from "./functions";
 
 export class IconButtonGroup {
   protected container: HTMLDivElement;
@@ -7,6 +7,7 @@ export class IconButtonGroup {
   protected selectedButtonClass: string = '';
   protected selected: string = '';
   protected iconButtonEvent: EventManager;
+  protected currentGroup: string[] = [];
 
   constructor(
     rows: number,
@@ -30,6 +31,7 @@ export class IconButtonGroup {
   }
 
   public updateIconButtons(icons: string[]): void {
+    this.currentGroup = icons;
     icons.forEach((item) => {
       let btnClass = (item == this.selected) ? this.selectedButtonClass : this.buttonClass;
       let button = createButton(createIcon(item), btnClass);
@@ -38,6 +40,11 @@ export class IconButtonGroup {
       });
       this.container.append(button);
     });
+  }
+
+  public refresh() {
+    emptyElement(this.container);
+    this.updateIconButtons(this.currentGroup);
   }
 
   public getElement(): HTMLDivElement {

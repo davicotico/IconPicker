@@ -39,3 +39,5 @@ ip.onSelect((parameters) => {
   output.innerText = parameters.icon;
 });
 ip.mount();
+
+ip.setSelected('bi bi-android');

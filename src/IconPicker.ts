@@ -53,13 +53,23 @@ export class IconPicker {
     this.iconButtonGroup = new IconButtonGroup(rows, cols, this.iconButtonEvent, this.options.iconButtonClass, this.options.selectedIconButtonClass);
     this.footer = new Footer();
     this.onSelect((params) => {
-      params.button.className = this.options.selectedIconButtonClass;
       this.iconButtonGroup.setSelected(params.icon);
+      this.iconButtonGroup.refresh();
     })
   }
 
   public onSelect(listener: IconButtonlistener): void {
     this.iconButtonEvent.on('select', listener);
+  }
+
+  public setSelected(icon: string) {
+    let index = this.groupList.getGroupIndex(icon);
+    if (index >= 0) {
+      this.iconButtonGroup.setSelected(icon);
+      let group = this.groupList.goTo(index);
+      emptyElement(this.iconButtonGroup.getElement());
+      this.updateElements(this.groupList, group, this.totalResult, this.navBar.getButtons());
+    }
   }
 
   public setupInputSearch(): void {
