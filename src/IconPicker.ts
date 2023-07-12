@@ -6,7 +6,7 @@ import { InputSearch } from "./InputSearch";
 import { NavBar } from "./NavBar";
 import { Popover } from "./Popover";
 import { KEYS, defaultOptions } from "./constants";
-import { createDiv, emptyElement } from "./functions";
+import { createDiv, createIcon, emptyElement } from "./functions";
 import { IconButtonlistener, NavButtons, Options } from "./types";
 
 export class IconPicker {
@@ -38,7 +38,7 @@ export class IconPicker {
       case 'BUTTON':
         this.container = createDiv(id  + '-ip-container', '250px')
         this.isButton = true;
-        this.button = element as HTMLButtonElement;
+        this.button = this.buildButton(element as HTMLButtonElement);
       break;
       default: 
         throw Error('Element it is not a div or button');
@@ -55,7 +55,25 @@ export class IconPicker {
     this.onSelect((params) => {
       this.iconButtonGroup.setSelected(params.icon);
       this.iconButtonGroup.refresh();
+      if (this.isButton) {
+        let i = this.button?.getElementsByTagName('i').item(0) as HTMLLIElement;
+        i.className = params.icon;
+      }
     })
+  }
+
+  private buildButton(button: HTMLButtonElement): HTMLButtonElement {
+    let icon = createIcon('');
+    icon.style.marginLeft = '4px';
+    icon.style.marginRight = '4px';
+    button.append(icon);
+    // <path fill="currentColor"
+    let caret = `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path fill="currentColor" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>`;
+    let i = document.createElement('i');
+    i.innerHTML = caret;
+    i.style.marginLeft = '10px';
+    button.append(i);
+    return button;
   }
 
   public onSelect(listener: IconButtonlistener): void {

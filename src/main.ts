@@ -25,7 +25,7 @@ const options: Options = {
 // bootstrap
 const options: Options = {
   iconButtonClass: 'btn btn-outline-secondary',
-  selectedIconButtonClass: 'btn btn-primary',
+  selectedIconButtonClass: 'btn btn-success',
   inputClass: 'form-control',
   inputPlaceholder: 'Search...',
   navButtonClass: 'btn btn-primary',
