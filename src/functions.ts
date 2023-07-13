@@ -1,3 +1,4 @@
+import { CARET } from "./constants";
 
 function createButton(content: string | HTMLElement, className: string = '') {
   const b = document.createElement('button');
@@ -23,6 +24,18 @@ function createDiv(className: string, width: string) {
   return d;
 }
 
+function makeIconPickerButton(button: HTMLButtonElement): HTMLButtonElement {
+  let icon = createIcon('');
+    icon.style.marginLeft = '6px';
+    icon.style.marginRight = '6px';
+    button.append(icon);
+    let i = document.createElement('i');
+    i.innerHTML = CARET;
+    i.style.marginLeft = '10px';
+    button.append(i);
+    return button;
+}
+
 function emptyElement(element: HTMLElement): void {
   while (element.firstChild) {
     element.removeChild(element.firstChild);
@@ -33,5 +46,6 @@ export {
   createButton,
   createIcon,
   createDiv,
+  makeIconPickerButton,
   emptyElement
 }

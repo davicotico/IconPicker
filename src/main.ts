@@ -30,7 +30,7 @@ const options: Options = {
   inputPlaceholder: 'Search...',
   navButtonClass: 'btn btn-primary',
   arrowPrevIconClass: 'bi bi-chevron-left',
-  arrowNextIconClass: 'bi bi-chevron-right'
+  arrowNextIconClass: 'bi bi-chevron-right',
 }
 
 const ip = new IconPicker('icons', bi, 4, 4, options);
