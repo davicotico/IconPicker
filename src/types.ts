@@ -18,6 +18,7 @@ interface Options {
   inputClass: string;
   arrowPrevIconClass: string;
   arrowNextIconClass: string;
+  templateFooter: string;
 }
 
 export type { IconButtonlistener, NavButtons, Options, ClickButtonParameter };

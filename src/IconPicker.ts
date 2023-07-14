@@ -44,14 +44,14 @@ export class IconPicker {
         throw Error('Element it is not a div or button');
     }
     this.iconset = iconset;
-    this.options = options;
+    this.options = { ...defaultOptions, ...options};
     this.groupSize = rows * cols;
     this.groupList = new GroupList(this.iconset, this.groupSize);
     this.totalResult = this.groupList.getTotalItems();
     this.inputSearch = new InputSearch(this.options.inputClass, this.options.inputPlaceholder);
     this.navBar = new NavBar(this.options.navButtonClass, this.options.arrowPrevIconClass, this.options.arrowNextIconClass);
     this.iconButtonGroup = new IconButtonGroup(rows, cols, this.iconButtonEvent, this.options.iconButtonClass, this.options.selectedIconButtonClass);
-    this.footer = new Footer();
+    this.footer = new Footer(this.options.templateFooter);
     this.onSelect((params) => {
       this.iconButtonGroup.setSelected(params.icon);
       this.iconButtonGroup.refresh();

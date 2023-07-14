@@ -26,10 +26,9 @@ function createDiv(className: string, width: string) {
 
 function makeIconPickerButton(button: HTMLButtonElement): HTMLButtonElement {
   let icon = createIcon('');
-    icon.style.marginLeft = '6px';
-    icon.style.marginRight = '6px';
+    icon.style.display = 'inline-block';
     button.append(icon);
-    let i = document.createElement('i');
+    let i = document.createElement('span');
     i.innerHTML = CARET;
     i.style.marginLeft = '10px';
     button.append(i);

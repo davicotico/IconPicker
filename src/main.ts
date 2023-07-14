@@ -27,10 +27,11 @@ const options: Options = {
   iconButtonClass: 'btn btn-outline-secondary',
   selectedIconButtonClass: 'btn btn-success',
   inputClass: 'form-control',
-  inputPlaceholder: 'Search...',
+  inputPlaceholder: 'Buscar...',
   navButtonClass: 'btn btn-primary',
   arrowPrevIconClass: 'bi bi-chevron-left',
   arrowNextIconClass: 'bi bi-chevron-right',
+  templateFooter: '{start} - {end} de {total}'
 }
 
 const ip = new IconPicker('icons', bi, 4, 4, options);

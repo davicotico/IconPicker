@@ -17,6 +17,7 @@ const defaultOptions: Options = {
     inputClass: 'ip-input-search',
     arrowPrevIconClass: '',
     arrowNextIconClass: '',
+    templateFooter: '[{start} - {end}] of {total}',
 }
 
 export {
