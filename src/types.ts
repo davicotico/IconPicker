@@ -11,14 +11,14 @@ interface NavButtons {
 }
 
 interface Options {
-  iconButtonClass: string;
-  selectedIconButtonClass: string;
-  navButtonClass: string;
-  inputPlaceholder: string;
-  inputClass: string;
-  arrowPrevIconClass: string;
-  arrowNextIconClass: string;
-  templateFooter: string;
+  iconButtonClass?: string;
+  selectedIconButtonClass?: string;
+  navButtonClass?: string;
+  inputPlaceholder?: string;
+  inputClass?: string;
+  arrowPrevIconClass?: string;
+  arrowNextIconClass?: string;
+  templateFooter?: string;
 }
 
 export type { IconButtonlistener, NavButtons, Options, ClickButtonParameter };

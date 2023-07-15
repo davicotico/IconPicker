@@ -1,16 +1,39 @@
 {
   "name": "icon-picker",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "description": "Vanilla Javascript Icon Picker (made with Typescript)",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.umd.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davicotico/IconPicker.git"
+  },
+  "author": {
+    "name": "David Tomas Ticona Saravia",
+    "url": "https://davidticona.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davicotico/IconPicker/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^20.4.2",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^3.3.0"
   },
   "dependencies": {
     "tippy.js": "^6.3.7"
