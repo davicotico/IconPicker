@@ -5,9 +5,9 @@ import { GroupList } from "./IconList";
 import { InputSearch } from "./InputSearch";
 import { NavBar } from "./NavBar";
 import { Popover } from "./Popover";
-import { KEYS, defaultOptions } from "./constants";
+import { KEYS, DEFAULT_OPTIONS } from "./constants";
 import { createDiv, emptyElement, makeIconPickerButton } from "./functions";
-import { IconButtonlistener, NavButtons, Options } from "./types";
+import { IconButtonlistener, NavButtons, IconPickerOptions } from "./types";
 
 export default class IconPicker {
   protected iconset: string[];
@@ -18,7 +18,7 @@ export default class IconPicker {
   protected navBar: NavBar;
   protected groupList: GroupList;
   protected iconButtonEvent = new EventManager();
-  protected options: Options;
+  protected options: IconPickerOptions;
   protected totalResult: number = 0;
   protected groupSize: number;
   protected isButton: boolean = false;
@@ -26,7 +26,7 @@ export default class IconPicker {
   protected popover: Popover | null = null;
   protected selected: string = '';
 
-  constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: Options = defaultOptions) {
+  constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: IconPickerOptions = DEFAULT_OPTIONS) {
     let element = document.getElementById(id);
     if (element == null) {
       throw Error('Element does not exists');
@@ -44,7 +44,7 @@ export default class IconPicker {
         throw Error('Element it is not a div or button');
     }
     this.iconset = iconset;
-    this.options = { ...defaultOptions, ...options};
+    this.options = { ...DEFAULT_OPTIONS, ...options};
     this.groupSize = rows * cols;
     this.groupList = new GroupList(this.iconset, this.groupSize);
     this.totalResult = this.groupList.getTotalItems();

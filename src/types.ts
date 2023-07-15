@@ -10,7 +10,7 @@ interface NavButtons {
   next: HTMLButtonElement;
 }
 
-interface Options {
+interface IconPickerOptions {
   iconButtonClass?: string;
   selectedIconButtonClass?: string;
   navButtonClass?: string;
@@ -21,4 +21,4 @@ interface Options {
   templateFooter?: string;
 }
 
-export type { IconButtonlistener, NavButtons, Options, ClickButtonParameter };
+export type { IconButtonlistener, NavButtons, IconPickerOptions, ClickButtonParameter };

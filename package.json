@@ -24,6 +24,16 @@
   "bugs": {
     "url": "https://github.com/davicotico/IconPicker/issues"
   },
+  "keywords": [
+    "javascript-icon-picker",
+    "icon-picker",
+    "iconpicker",
+    "icons",
+    "icon-font",
+    "javascript",
+    "typescript",
+    "tippyjs"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

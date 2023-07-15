@@ -1,6 +1,13 @@
+import pkg from './package.json';
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+
+const banner = `/*! ${pkg.name} ${pkg.version} | ${pkg.description}
+@author ${pkg.author}
+@version ${pkg.version}
+@license ${pkg.license}
+*/`;
 
 export default defineConfig({
   build: {
@@ -23,8 +30,9 @@ export default defineConfig({
             return 'css/styles.css';
           }
           return `[name][hash][extname]`;
-        }
-      }
+        },
+        banner: banner
+      },
     }
   },
   plugins: [dts()],
