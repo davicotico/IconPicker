@@ -125,6 +125,13 @@ export default class IconPicker {
     this.footer.update(this.groupList.getIndex(), this.groupSize, arrGroup.length, totalResult);
   }
 
+  public setPopoverTheme(theme: string) {
+    if (this.isButton) {
+      theme = (theme === 'dark') ? 'material' : 'light-border';
+      this.popover?.setTheme(theme);
+    }
+  }
+
   public mount(): void {
     let firstGroup = this.groupList.first();
     this.iconButtonGroup.updateIconButtons(firstGroup);
