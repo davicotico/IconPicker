@@ -1,9 +1,6 @@
 import tippy, { Instance } from "tippy.js";
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light-border.css';
-import 'tippy.js/themes/material.css';
-import 'tippy.js/themes/translucent.css';
 import { PopOverPlacement } from "./types";
+import 'tippy.js/dist/tippy.css';
 
 export class Popover {
   protected instance: Instance;
@@ -15,7 +12,7 @@ export class Popover {
       interactive: true,
       trigger: "click",
       placement: placement,
-      theme: "material",
+      theme: "dark",
     });
   }
 

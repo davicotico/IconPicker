@@ -127,7 +127,6 @@ export default class IconPicker {
 
   public setPopoverTheme(theme: string) {
     if (this.isButton) {
-      theme = (theme === 'dark') ? 'dark' : 'light-border';
       this.popover?.setTheme(theme);
     }
   }
