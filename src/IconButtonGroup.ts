@@ -10,16 +10,13 @@ export class IconButtonGroup {
   protected currentGroup: string[] = [];
 
   constructor(
-    rows: number,
-    cols: number,
     eventManager: EventManager,
     iconButtonClass: string,
     selectedButtonClass: string,
   ) {
     this.container = createDiv("icon-button-group", "100%");
     this.container.style.display = "grid";
-    this.container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-    this.container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    this.container.style.gridTemplateColumns = `repeat(auto-fit, minmax(40px, 1fr))`
     this.container.style.gap = "8px";
     this.buttonClass = iconButtonClass;
     this.selectedButtonClass = selectedButtonClass;

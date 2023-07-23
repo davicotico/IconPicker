@@ -8,7 +8,7 @@ Vanilla Javascript Icon Picker (made with Typescript)
 ```
 
 ```javascript
-const iconPicker = new IconPicker('element-id', iconset, 4, 5, { iconButtonClass: 'btn btn-secondary' });
+const iconPicker = new IconPicker('element-id', iconset, 20, { iconButtonClass: 'btn btn-secondary' });
 iconPicker.onSelect((icono) => {
   console.log(icono);
 });
@@ -31,7 +31,8 @@ iconPicker.mount();
 
 ## Methods
 
-* constructor(id: string, iconsets: string[], rows: number, cols: number, options: Options)
-* onSelect(listener: (param: { icon: string, button: HTMLButtonElement} => void): void
+* constructor(id: string, iconsets: string[], pageSize: number, options: Options)
+* onChange(listener: (param: { icon: string, button: HTMLButtonElement} => void): void
 * setSelected(icon: string): void
+* setPopoverTheme(theme: string): void
 * mount(): void

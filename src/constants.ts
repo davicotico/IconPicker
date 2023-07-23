@@ -18,6 +18,7 @@ const DEFAULT_OPTIONS: IconPickerOptions = {
     arrowPrevIconClass: '',
     arrowNextIconClass: '',
     templateFooter: '[{start} - {end}] of {total}',
+    placement: 'right'
 }
 
 export {

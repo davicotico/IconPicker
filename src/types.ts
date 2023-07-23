@@ -10,6 +10,8 @@ interface NavButtons {
   next: HTMLButtonElement;
 }
 
+type PopOverPlacement = 'bottom' | 'top' | 'left' | 'right';
+
 interface IconPickerOptions {
   iconButtonClass?: string;
   selectedIconButtonClass?: string;
@@ -19,7 +21,7 @@ interface IconPickerOptions {
   arrowPrevIconClass?: string;
   arrowNextIconClass?: string;
   templateFooter?: string;
-  placement?: string; // popover placement
+  placement?: PopOverPlacement;
 }
 
-export type { IconButtonlistener, NavButtons, IconPickerOptions, ClickButtonParameter };
+export type { IconButtonlistener, NavButtons, IconPickerOptions, ClickButtonParameter, PopOverPlacement };

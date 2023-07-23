@@ -26,7 +26,7 @@ export default class IconPicker {
   protected popover: Popover | null = null;
   protected selected: string = '';
 
-  constructor(id: string, iconset: string[], rows: number = 4, cols: number = 5, options: IconPickerOptions = DEFAULT_OPTIONS) {
+  constructor(id: string, iconset: string[], pageSize: number = 20, options: IconPickerOptions = DEFAULT_OPTIONS) {
     let element = document.getElementById(id);
     if (element == null) {
       throw Error('Element does not exists');
@@ -45,14 +45,14 @@ export default class IconPicker {
     }
     this.iconset = iconset;
     this.options = { ...DEFAULT_OPTIONS, ...options};
-    this.groupSize = rows * cols;
+    this.groupSize = pageSize;
     this.groupList = new GroupList(this.iconset, this.groupSize);
     this.totalResult = this.groupList.getTotalItems();
     this.inputSearch = new InputSearch(this.options.inputClass!, this.options.inputPlaceholder!);
     this.navBar = new NavBar(this.options.navButtonClass!, this.options.arrowPrevIconClass!, this.options.arrowNextIconClass!);
-    this.iconButtonGroup = new IconButtonGroup(rows, cols, this.iconButtonEvent, this.options.iconButtonClass!, this.options.selectedIconButtonClass!);
+    this.iconButtonGroup = new IconButtonGroup(this.iconButtonEvent, this.options.iconButtonClass!, this.options.selectedIconButtonClass!);
     this.footer = new Footer(this.options.templateFooter!);
-    this.onSelect((params) => {
+    this.onChange((params) => {
       this.iconButtonGroup.setSelected(params.icon);
       this.iconButtonGroup.refresh();
       if (this.isButton) {
@@ -62,7 +62,7 @@ export default class IconPicker {
     })
   }
 
-  public onSelect(listener: IconButtonlistener): void {
+  public onChange(listener: IconButtonlistener): void {
     this.iconButtonEvent.on('select', listener);
   }
 
@@ -127,7 +127,7 @@ export default class IconPicker {
 
   public setPopoverTheme(theme: string) {
     if (this.isButton) {
-      theme = (theme === 'dark') ? 'material' : 'light-border';
+      theme = (theme === 'dark') ? 'dark' : 'light-border';
       this.popover?.setTheme(theme);
     }
   }
@@ -141,7 +141,7 @@ export default class IconPicker {
     this.footer.update(this.groupList.getIndex(), this.groupSize, firstGroup.length, this.groupList.getTotalItems());
     this.container.append(this.footer.getElement());
     if (this.isButton) {
-      this.popover = new Popover(this.container, this.button as Element);
+      this.popover = new Popover(this.container, this.button as Element, this.options.placement);
       this.iconButtonEvent.on('select', () => {
         this.popover?.hide();
       });
