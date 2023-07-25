@@ -22,6 +22,7 @@ interface IconPickerOptions {
   arrowNextIconClass?: string;
   templateFooter?: string;
   placement?: PopOverPlacement;
+  popoverTheme?: string;
 }
 
 export type { IconButtonlistener, NavButtons, IconPickerOptions, ClickButtonParameter, PopOverPlacement };

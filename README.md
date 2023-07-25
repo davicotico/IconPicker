@@ -26,13 +26,47 @@ iconPicker.mount();
   arrowPrevIconClass: string;
   arrowNextIconClass: string;
   templateFooter: string;
+  placement: PopOverPlacement; // 'bottom' | 'top' | 'left' | 'right'
+  popoverTheme: string;
 }
 ```
 
 ## Methods
 
-* constructor(id: string, iconsets: string[], pageSize: number, options: Options)
-* onChange(listener: (param: { icon: string, button: HTMLButtonElement} => void): void
-* setSelected(icon: string): void
-* setPopoverTheme(theme: string): void
-* mount(): void
+### constructor(id: string, iconset: string[], pageSize: number, options: Options)
+
+```javascript
+//const iconset = ['fa-solid fa-home', 'fa-solid fa-star',...];
+var iconPicker = new IconPicker('element-id', iconset, 30, {});
+```
+
+### setSelected(icon: string): void
+
+```javascript
+iconPicker.setSelected('fa-solid fa-home');
+```
+
+### setPopoverTheme(theme: string): void
+
+Only when the icon picker is a button
+
+```javascript
+iconPicker.setPopoverTheme('dark'); // 'dark' | 'light'
+```
+
+### mount(): void
+Build and renderize the icon picker
+
+```javascript
+iconPicker.mount();
+```
+
+## Events
+
+### onChange(listener: (param: { icon: string, button: HTMLButtonElement} => void): void
+
+```javascript
+iconPicker.onChange((params) => {
+  console.log('Icon: ' + params.icon);
+});
+```

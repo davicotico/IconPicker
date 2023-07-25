@@ -5,14 +5,14 @@ import 'tippy.js/dist/tippy.css';
 export class Popover {
   protected instance: Instance;
 
-  constructor(container: HTMLDivElement, button: Element, placement: PopOverPlacement = 'bottom') {
+  constructor(container: HTMLDivElement, button: Element, placement: PopOverPlacement = 'bottom', theme: string = 'dark') {
     this.instance = tippy(button as Element, {
       content: container,
       appendTo: document.body,
       interactive: true,
       trigger: "click",
       placement: placement,
-      theme: "dark",
+      theme: theme,
     });
   }
 

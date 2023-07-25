@@ -140,7 +140,7 @@ export default class IconPicker {
     this.footer.update(this.groupList.getIndex(), this.groupSize, firstGroup.length, this.groupList.getTotalItems());
     this.container.append(this.footer.getElement());
     if (this.isButton) {
-      this.popover = new Popover(this.container, this.button as Element, this.options.placement);
+      this.popover = new Popover(this.container, this.button as Element, this.options.placement, this.options.popoverTheme);
       this.iconButtonEvent.on('select', () => {
         this.popover?.hide();
       });

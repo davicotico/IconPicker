@@ -18,7 +18,8 @@ const DEFAULT_OPTIONS: IconPickerOptions = {
     arrowPrevIconClass: '',
     arrowNextIconClass: '',
     templateFooter: '[{start} - {end}] of {total}',
-    placement: 'right'
+    placement: 'right',
+    popoverTheme: 'dark'
 }
 
 export {
