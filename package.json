@@ -1,6 +1,6 @@
 {
   "name": "@davicotico/icon-picker",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Vanilla Javascript Icon Picker (made with Typescript)",
   "main": "./lib/index.js",
   "publishConfig": {
