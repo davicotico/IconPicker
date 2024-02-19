@@ -1,5 +1,5 @@
 {
-  "name": "icon-picker",
+  "name": "@davicotico/icon-picker",
   "version": "0.0.0",
   "description": "Vanilla Javascript Icon Picker (made with Typescript)",
   "main": "./lib/index.js",
@@ -36,7 +36,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --config vite.config-prod.ts",
+    "build:page": "tsc && vite build --config vite-config-page.ts",
     "preview": "vite preview"
   },
   "devDependencies": {

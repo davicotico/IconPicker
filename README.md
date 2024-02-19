@@ -1,7 +1,21 @@
 # IconPicker
 Vanilla Javascript Icon Picker (made with Typescript)
 
-## How to use
+## Features
+
+* Vanilla Javascript
+* Fully customizable
+* Lightweight (24 KB gzipped)
+
+## Installation
+
+### Via NPM
+
+```
+npm i @davicotico/icon-picker
+```
+
+## Usage
 
 ```html
 <div style="250px" id="element-id"></div>
@@ -9,8 +23,8 @@ Vanilla Javascript Icon Picker (made with Typescript)
 
 ```javascript
 const iconPicker = new IconPicker('element-id', iconset, 20, { iconButtonClass: 'btn btn-secondary' });
-iconPicker.onSelect((icono) => {
-  console.log(icono);
+iconPicker.onChange((params) => {
+  console.log(params.icon);
 });
 iconPicker.mount();
 ```
@@ -70,3 +84,10 @@ iconPicker.onChange((params) => {
   console.log('Icon: ' + params.icon);
 });
 ```
+## License
+
+MIT
+
+## Contact
+* Twitter: @davicotico
+* Linkedin: 

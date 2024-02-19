@@ -1,0 +1,33 @@
+import { EventManager } from "./EventManager";
+import { Footer } from "./Footer";
+import { IconButtonGroup } from "./IconButtonGroup";
+import { GroupList } from "./IconList";
+import { InputSearch } from "./InputSearch";
+import { NavBar } from "./NavBar";
+import { Popover } from "./Popover";
+import { IconButtonlistener, NavButtons, IconPickerOptions } from "./types";
+export default class IconPicker {
+    protected iconset: string[];
+    protected container: HTMLDivElement;
+    protected inputSearch: InputSearch;
+    protected iconButtonGroup: IconButtonGroup;
+    protected footer: Footer;
+    protected navBar: NavBar;
+    protected groupList: GroupList;
+    protected iconButtonEvent: EventManager;
+    protected options: IconPickerOptions;
+    protected totalResult: number;
+    protected groupSize: number;
+    protected isButton: boolean;
+    protected button: HTMLButtonElement | null;
+    protected popover: Popover | null;
+    protected selected: string;
+    constructor(id: string, iconset: string[], pageSize?: number, options?: IconPickerOptions);
+    onChange(listener: IconButtonlistener): void;
+    setSelected(icon: string): void;
+    setupInputSearch(): void;
+    setupNavButtons(): void;
+    protected updateElements(groupList: GroupList, arrGroup: string[], totalResult: number, navButtons: NavButtons): void;
+    setPopoverTheme(theme: string): void;
+    mount(): void;
+}
