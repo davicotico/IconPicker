@@ -4,7 +4,8 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
 const banner = `
-/*! IconPicker ${pkg.version} | ${pkg.description}
+/**! 
+IconPicker ${pkg.version} | ${pkg.description}
 @author ${pkg.author.name} (${pkg.author.url})
 @version ${pkg.version}
 @license ${pkg.license}

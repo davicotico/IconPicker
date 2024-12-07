@@ -76,7 +76,7 @@ export default class IconPicker {
     }
   }
 
-  public setupInputSearch(): void {
+  protected setupInputSearch(): void {
     this.inputSearch.getInput().addEventListener('keyup', (evt) => {
       if (evt.key == KEYS.ESCAPE && this.isButton) {
         this.popover?.hide();
@@ -100,7 +100,7 @@ export default class IconPicker {
     this.container?.append(this.inputSearch.getElement());
   }
 
-  public setupNavButtons() {
+  protected setupNavButtons() {
     let total = this.groupList.getTotalGroups();
     this.navBar.setupNavLabel(this.groupList.getIndex(), total);
     this.navBar.updateNavButtons(this.groupList.isFirst(), this.groupList.isLast(), this.navBar.getButtons().previous, this.navBar.getButtons().next);
